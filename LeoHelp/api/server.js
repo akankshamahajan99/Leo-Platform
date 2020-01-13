@@ -5,13 +5,15 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const PORT = 4001;
 const LeoHelp = express.Router()
+const fetch = require('node-fetch');
+
+var fs = require('fs');
 
 const schemas = require('./db.model');
-//let users = db.users;
+
 user = schemas.user;
 DRO = schemas.DRO;
-//application = schemas.application;
-//application = schemas.application;
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/LeoHelp', LeoHelp);
@@ -69,6 +71,92 @@ LeoHelp.route('/allDRO').get(function(req, res) {
 	    res.status(200).json(DRO);
 	}
     });
+});
+
+
+LeoHelp.route('/deleteAllUsers').delete( async (req, res) => {
+	await user.remove({});
+    res.status(200).json({'result ': " All users deleted successfully"});  
+});
+
+LeoHelp.route('/deleteAllDROs').delete( async (req, res) => {
+	await DRO.remove({});
+    res.status(200).json({'result ':  " All DROs deleted successfully"});  
+});
+
+LeoHelp.route('/markTrouble').post( async (req, res) => {
+	try{
+		 let data = await user.findOne({user_name : req.body.user_name });
+		 data = _.extend(data, req.body);
+		 console.log(data);
+
+		/*
+			Code to trigger authority, contacts
+		*/
+
+		let start = "http://api.opencagedata.com/geocode/v1/json?key=4a4590286e2c474ca287e179cd718be9&q=";
+		let mid = "%2C+";
+		let end = "&pretty=1&no_annotations=1";
+		//console.log((req.body.latitude));
+		let url = start + req.body.latitude + mid + req.body.longitude + end;
+ 		//console.log(url);
+
+		//let url = "http://api.opencagedata.com/geocode/v1/json?key=4a4590286e2c474ca287e179cd718be9&q=19.0728%2C+72.8826&pretty=1&no_annotations=1";
+
+		let settings = { method: "Get" };
+	
+		await fetch(url, settings)
+		    .then(res => res.json())
+		    .then((json) => {
+		    	
+		    	let continent = json.results[0].components.continent;
+		    	let country_code = json.results[0].components.country_code;
+		    	let country = json.results[0].components.country;
+		    	let postcode = json.results[0].components.postcode;
+		    	let state = json.results[0].components.state;
+		    	let state_district = json.results[0].components.state_district;
+		    	
+		    	formatted = json.results[0].formatted;
+		    	data.area = formatted;
+		    	//console.log(formatted);
+		    });
+
+
+		// console.log(data);
+		 data.inTrouble = true;
+		 data.longitude = req.body.longitude;
+		 data.latitude = req.body.latitude;
+		 data.area = formatted;
+		 data.save();
+		 console.log(data);
+		 
+
+		 /*
+		const dataa = await applications.findByIdAndRemove({
+			_id : data._id
+		});
+		res.send(dataa)*/
+	}
+	catch(e){
+
+	}
+	res.status(200).json({'message ' : req.body.user_name + " is marked introuble at latitude " + req.body.latitude + " and " + req.body.longitude});	
+});
+
+LeoHelp.route('/unmarkTrouble').post( async (req, res) => {
+	try{
+		 let data = await user.findOne({user_name : req.body.user_name });
+		 console.log(data);
+		 data.inTrouble = false;
+		 data.longitude = req.body.longitude;
+		 data.latitude = req.body.latitude;
+		 data.save();
+		 console.log(data);
+	}
+	catch(e){
+
+	}
+	res.status(400).json({'message ' : req.body.user_name + " is unmarked "});	
 });
 
 /*

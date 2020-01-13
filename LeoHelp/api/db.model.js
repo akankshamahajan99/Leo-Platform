@@ -17,9 +17,12 @@ let user = new Schema({
     phone : {
         type : Number
     },
-    emergencyContacts : [Number],
+    emergencyContacts : [{
+        contactName : String, 
+        phone : Number
+    }],
     longitude : {
-        type : Number
+        type : Number //float
     },
     latitude : {
         type : Number
@@ -30,8 +33,8 @@ let user = new Schema({
     area : {
         type : String
     },
-    introuble : {
-        type : Number // 0 no, 1 yes
+    inTrouble : {
+        type : Boolean // 0 no, 1 yes
     }
 });
 
