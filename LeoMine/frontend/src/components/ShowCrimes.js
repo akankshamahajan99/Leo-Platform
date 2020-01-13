@@ -7,7 +7,7 @@ const SList = props => (
     <tr>
         <td>{props.data.name}</td>
         <td>{props.data.description}</td>
-        <td>{props.data.precautions}</td>
+        <td>{props.data.precautions.map(u => (<p>{u}</p>))}</td>
     </tr>
 )
 
@@ -38,6 +38,12 @@ export default class ShowCrimes extends Component {
     render() {
         return (
                 <div className = 'container'>
+                    <Link to="/AddCrime">add a crime</Link>
+                    <br/><br/>
+                    <Link to="/AddArea">add a area</Link>
+                    <br/><br/>
+                    <Link to="/ShowAreas">show all areas</Link>
+                   
                     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
                     </nav>
                     <div>
@@ -55,6 +61,7 @@ export default class ShowCrimes extends Component {
                             </tbody>
                         </table>
                     </div>
+                    
                 </div>
         )
     }

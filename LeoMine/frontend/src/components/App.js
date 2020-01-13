@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch, Link } from "react-router-dom";
 
 import AddCrime from './AddCrime';
 import AddArea from './AddArea';
 import ShowCrimes from './ShowCrimes';
 import ShowAreas from './ShowAreas';
+
 
 /*
 //import SignIn from './SignIn'
@@ -15,11 +16,19 @@ import ApplicationList from './ApplicationList';
 class App extends Component {
 	render() {
 		return (
-			<div><center><h1>Leo Mine</h1></center>
-			<AddCrime />
-			<AddArea />
-			<ShowCrimes />
-			<ShowAreas />
+			<div>
+			<center><h1>Leo Mine</h1></center>
+			<Router>
+					<div className="App">
+					<Switch>
+						<Route exact path="/AddCrime" component={AddCrime} />
+						<Route exact path="/AddArea" component={AddArea} />
+						<Route exact path="/ShowCrimes" component={ShowCrimes}/>
+						<Route exact path="/ShowAreas" component={ShowAreas}/>
+						<Redirect from="/" to="AddArea" />
+					</Switch>
+					</div>
+				</Router>		
 			</div>
 		);
 	}

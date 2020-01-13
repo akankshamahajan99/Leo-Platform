@@ -115,6 +115,13 @@ export default class AddCrime extends Component {
 							
 				</form>
 				</center>
+
+				<Link to="/AddArea">add a Area</Link>
+				<br/><br/>
+				<Link to="/ShowCrimes">show all crimes</Link>
+				<br/><br/>
+				<Link to="/ShowAreas">show all areas</Link>
+				
 			</div>
 		)
 	}

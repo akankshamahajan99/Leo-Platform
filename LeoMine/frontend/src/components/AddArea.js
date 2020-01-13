@@ -119,6 +119,13 @@ export default class AddArea extends Component {
 							
 				</form>
 				</center>
+			<Link to="/AddCrime">add a crime</Link>
+			<br/><br/>
+			<Link to="/ShowCrimes">show all crimes</Link>
+			<br/><br/>
+			<Link to="/ShowAreas">show all areas</Link>
+														
+		
 			</div>
 		)
 	}

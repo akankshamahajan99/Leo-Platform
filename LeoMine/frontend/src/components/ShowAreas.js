@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const SList = props => (
     <tr>
         <td>{props.data.name}</td>
-        <td>{props.data.crimes}</td>
+        <td>{props.data.crimes.map(u => (<p>{u}</p>))}</td>
     </tr>
 )
 
@@ -37,6 +37,14 @@ export default class ShowAreas extends Component {
     render() {
         return (
                 <div className = 'container'>
+              
+
+                    <Link to="/AddCrime">add a crime</Link>
+                    <br/><br/>
+                    <Link to="/ShowCrimes">show all crimes</Link>
+                    <br/><br/>
+                    <Link to="/AddArea">Add an area</Link>
+
                     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
                     </nav>
                     <div>
@@ -53,6 +61,8 @@ export default class ShowAreas extends Component {
                             </tbody>
                         </table>
                     </div>
+              
+                    
                 </div>
         )
     }
