@@ -53,12 +53,17 @@ let DRO = new Schema({
     },
     email : {
         type : String
-    }   
+    },
+    latitude : {
+        type : String
+    },
+    longitude : {
+        type : String
+    }
 });
 
 user = mongoose.model('user', user);
 DRO = mongoose.model('DRO', DRO);
-//application = mongoose.model('application', application);
 var my_schemas = {'user': user, 'DRO': DRO};
 module.exports = my_schemas;
 
