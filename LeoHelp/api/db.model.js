@@ -17,12 +17,9 @@ let user = new Schema({
     phone : {
         type : Number
     },
-    emergencyContacts : [{
-        contactName : String, 
-        phone : Number
-    }],
+    emergencyContacts : [Number],
     longitude : {
-        type : Number //float
+        type : Number
     },
     latitude : {
         type : Number
@@ -33,8 +30,8 @@ let user = new Schema({
     area : {
         type : String
     },
-    inTrouble : {
-        type : Boolean // 0 no, 1 yes
+    introuble : {
+        type : Number // 0 no, 1 yes
     }
 });
 
@@ -53,17 +50,12 @@ let DRO = new Schema({
     },
     email : {
         type : String
-    },
-    latitude : {
-        type : String
-    },
-    longitude : {
-        type : String
-    }
+    }   
 });
 
 user = mongoose.model('user', user);
 DRO = mongoose.model('DRO', DRO);
+//application = mongoose.model('application', application);
 var my_schemas = {'user': user, 'DRO': DRO};
 module.exports = my_schemas;
 
