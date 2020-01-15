@@ -5,62 +5,64 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const SList = props => (
     <tr>
-        <td>{props.data.name}</td>
-        <td>{props.data.description}</td>
-        <td>{props.data.precautions.map(u => (<p>{u}</p>))}</td>
+        <td>{props.data}</td>
     </tr>
 )
 
-export default class ShowCrimes extends Component {
+export default class ShowECs extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            crimeslist : []
+            EClist : ["praj", "praj"]
         };
     }
     componentDidMount() {
-        axios.get('http://localhost:4000/LeoMine/allCrimes')
+        console.log("****");
+        console.log(this.props.user_name);
+        console.log("****");
+        
+        const data = {
+            user_name : this.props.user_name
+        }
+        console.log(data);
+        axios.post('http://localhost:4001/LeoHelp/getECs', data)
             .then(response => {
                 this.setState({
-                    crimeslist : response.data
+                    EClist : response.data
                 });
+                console.log("****");
+                console.log("0000");
+                console.log("****");
+                
+
             })
             .catch(function(error) {
                 console.log(error);
             })
+            console.log(this.state.EClist);
     }
 
-    crimesList() {
-        return this.state.crimeslist.map(function(data, i) {
+    ECList() {
+        return this.state.EClist.map(function(data, i) {
             return <SList data = {data} key={i} />;
-        })
+        });
     }
     render() {
         return (
                 <div className = 'container'>
-                    <Link to="/AddCrime">add a crime</Link>
-                    <br/><br/>
-                    <Link to="/AddArea">add a area</Link>
-                    <br/><br/>
-                    <Link to="/ShowAreas">show all areas</Link>
-                    <br/><br/>
-                    <Link to="/WebScrap">web scrap</Link>
-           
-                   
+                    <h3> Your emergency contacts are </h3>
+                              
                     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
                     </nav>
                     <div>
-                        <h3>List</h3>
                         <table className = 'table table-striped' style={{marginTop: 20}}>
                             <thead>
                                 <tr>
-                                    <th> Name </th>
-                                    <th> Description </th>
-                                    <th> precautions </th>
+                                    <th> Contacts </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.crimesList()}
+                                {this.ECList()}
                             </tbody>
                         </table>
                     </div>

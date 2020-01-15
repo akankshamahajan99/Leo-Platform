@@ -44,6 +44,9 @@ export default class ShowAreas extends Component {
                     <Link to="/ShowCrimes">show all crimes</Link>
                     <br/><br/>
                     <Link to="/AddArea">Add an area</Link>
+                    <br/><br/>
+                    <Link to="/WebScrap">web scrap</Link>
+           
 
                     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
                     </nav>

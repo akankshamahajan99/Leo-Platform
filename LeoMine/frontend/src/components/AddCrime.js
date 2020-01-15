@@ -121,7 +121,9 @@ export default class AddCrime extends Component {
 				<Link to="/ShowCrimes">show all crimes</Link>
 				<br/><br/>
 				<Link to="/ShowAreas">show all areas</Link>
-				
+				<br/><br/>
+           		<Link to="/WebScrap">web scrap</Link>
+           
 			</div>
 		)
 	}

@@ -6,23 +6,25 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const SList = props => (
     <tr>
         <td>{props.data.name}</td>
-        <td>{props.data.description}</td>
-        <td>{props.data.precautions.map(u => (<p>{u}</p>))}</td>
+        <td>{props.data.phone}</td>
+        <td>{props.data.area}</td>
+        <td>{props.data.latitude}</td>
+        <td>{props.data.longitude}</td>
     </tr>
 )
 
-export default class ShowCrimes extends Component {
+export default class StartupList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            crimeslist : []
+            DROslist : []
         };
     }
     componentDidMount() {
-        axios.get('http://localhost:4000/LeoMine/allCrimes')
+        axios.get('http://localhost:4001/LeoHelp/allDROs')
             .then(response => {
                 this.setState({
-                    crimeslist : response.data
+                    DROslist : response.data
                 });
             })
             .catch(function(error) {
@@ -30,23 +32,14 @@ export default class ShowCrimes extends Component {
             })
     }
 
-    crimesList() {
-        return this.state.crimeslist.map(function(data, i) {
+    DROsList() {
+        return this.state.DROslist.map(function(data, i) {
             return <SList data = {data} key={i} />;
         })
     }
     render() {
         return (
                 <div className = 'container'>
-                    <Link to="/AddCrime">add a crime</Link>
-                    <br/><br/>
-                    <Link to="/AddArea">add a area</Link>
-                    <br/><br/>
-                    <Link to="/ShowAreas">show all areas</Link>
-                    <br/><br/>
-                    <Link to="/WebScrap">web scrap</Link>
-           
-                   
                     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
                     </nav>
                     <div>
@@ -55,16 +48,17 @@ export default class ShowCrimes extends Component {
                             <thead>
                                 <tr>
                                     <th> Name </th>
-                                    <th> Description </th>
-                                    <th> precautions </th>
+                                    <th> Phone </th>
+                                    <th> Area </th>
+                                    <th> latitude </th>
+                                    <th> longitude </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.crimesList()}
+                                {this.DROsList()}
                             </tbody>
                         </table>
                     </div>
-                    
                 </div>
         )
     }

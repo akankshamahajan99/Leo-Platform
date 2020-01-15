@@ -5,7 +5,7 @@ import AddCrime from './AddCrime';
 import AddArea from './AddArea';
 import ShowCrimes from './ShowCrimes';
 import ShowAreas from './ShowAreas';
-
+import WebScrap from './WebScrap';
 
 /*
 //import SignIn from './SignIn'
@@ -25,6 +25,7 @@ class App extends Component {
 						<Route exact path="/AddArea" component={AddArea} />
 						<Route exact path="/ShowCrimes" component={ShowCrimes}/>
 						<Route exact path="/ShowAreas" component={ShowAreas}/>
+						<Route exact path = "/WebScrap" component={WebScrap}/>
 						<Redirect from="/" to="AddArea" />
 					</Switch>
 					</div>

@@ -6,6 +6,8 @@ import Error from '../elements/Error';
 import { REGISTRATION_FIELDS, REGISTRATION_MESSAGE, COMMON_FIELDS, ERROR_IN_REGISTRATION } from '../MessageBundle';
 import axios from 'axios';
 
+import Header from './Header';
+
 export default class AddArea extends Component {
 	constructor(props) {
 		super(props);
@@ -98,6 +100,7 @@ export default class AddArea extends Component {
 
 		return (
 			<div><center>
+				<Header />
 				<br/> <br/> <br/> <br/>
 				<h2>Add Area </h2>
 				<form onSubmit = {this.onSubmit}>
@@ -124,7 +127,9 @@ export default class AddArea extends Component {
 			<Link to="/ShowCrimes">show all crimes</Link>
 			<br/><br/>
 			<Link to="/ShowAreas">show all areas</Link>
-														
+			<br/><br/>
+            <Link to="/WebScrap">web scrap</Link>
+                   									
 		
 			</div>
 		)
