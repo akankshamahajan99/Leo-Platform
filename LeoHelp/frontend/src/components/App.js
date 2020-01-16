@@ -47,7 +47,7 @@ class App extends Component {
 					<Route exact path="/DROSignIn" component={DROSignIn} />
 					<Route exact path="/DROSignUp" component={DROSignUp} />
 						
-					<Redirect from="/" to="DROPanel" />
+					<Redirect from="/" to="UserSignIn" />
 				</Switch>
 				</div>
 			</Router>
